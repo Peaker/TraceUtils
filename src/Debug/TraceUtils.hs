@@ -18,6 +18,12 @@ import Debug.Trace(trace)
 -- | Generate an identity function that has the side-effect of tracing
 -- the value that passes through it by first processing it and then
 -- showing the result.
+--
+-- Examples:
+--
+-- traceIdVia (take 5) \"First 5 sorted elements of: \" result
+--
+-- fmap (traceIdVia objName \"The object we got\") . receiveObject
 traceIdVia :: Show b =>
               (a -> b) -- ^ Function to preprocess the value before showing it
            -> String   -- ^ Prefix string to use before showing the result value
@@ -26,6 +32,10 @@ traceIdVia via prefix x = trace (prefix ++ show (via x)) x
 
 -- | Generate an identity function that has the side-effect of showing
 -- the value that passes through it.
+--
+-- Examples:
+--
+-- traceId \"x,y = \" (x, y)
 traceId :: Show a =>
            String -- ^ Prefix string to use before showing the value
         -> a -> a
@@ -34,5 +44,9 @@ traceId = traceIdVia id
 -- | Convert a pure function to one that also has a side effect of
 -- tracing the value of the input and output values that pass through
 -- the function.
+--
+-- Examples:
+--
+-- traceAround \"filterEntries\" filterEntries entries
 traceAround :: (Show i, Show o) => String -> (i -> o) -> i -> o
 traceAround funcName func = traceId ("output from " ++ funcName) . func . traceId ("input to " ++ funcName)
