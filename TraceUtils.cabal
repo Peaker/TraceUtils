@@ -3,7 +3,7 @@
 -- http://www.haskell.org/cabal/release/cabal-latest/doc/users-guide/authors.html#pkg-descr.
 -- The name of the package.
 Name:                TraceUtils
-Version:             0.1
+Version:             0.1.0.1
 Synopsis:            Functions that should have been in Debug.Trace
 Description:         Functions that should have been in Debug.Trace
 Homepage:            https://github.com/Peaker/TraceUtils

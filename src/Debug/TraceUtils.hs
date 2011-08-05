@@ -28,7 +28,7 @@ traceIdVia :: Show b =>
               (a -> b) -- ^ Function to preprocess the value before showing it
            -> String   -- ^ Prefix string to use before showing the result value
            -> a -> a
-traceIdVia via prefix x = trace (prefix ++ show (via x)) x
+traceIdVia via prefix x = trace (prefix ++ ": " ++ show (via x)) x
 
 -- | Generate an identity function that has the side-effect of showing
 -- the value that passes through it.
