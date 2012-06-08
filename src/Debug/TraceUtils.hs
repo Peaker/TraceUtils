@@ -8,12 +8,21 @@
 -- dependency.
 
 module Debug.TraceUtils(
-  traceId
- ,traceIdVia
- ,traceAround
+    traceId
+  , traceIdVia
+  , traceAround
+  , tracePutStrLn
+  , tracePrint
+  , trace
 ) where
 
 import Debug.Trace(trace)
+
+tracePutStrLn :: Monad m => String -> m ()
+tracePutStrLn x = trace x $ return ()
+
+tracePrint :: (Show a, Monad m) => a -> m ()
+tracePrint = tracePutStrLn . show
 
 -- | Generate an identity function that has the side-effect of tracing
 -- the value that passes through it by first processing it and then
