@@ -3,7 +3,7 @@
 -- http://www.haskell.org/cabal/release/cabal-latest/doc/users-guide/authors.html#pkg-descr.
 -- The name of the package.
 Name:                TraceUtils
-Version:             0.1.0.2
+Version:             0.1.0.3
 Synopsis:            Functions that should have been in Debug.Trace
 Description:         Functions that should have been in Debug.Trace
 Homepage:            https://github.com/Peaker/TraceUtils
@@ -16,7 +16,8 @@ Build-type:          Simple
 Cabal-version:       >=1.2
 
 Library
-  Exposed-modules:   Debug.TraceUtils
+  Exposed-modules:   Debug.TraceUtils,
+                     Debug.TraceUtils.Dont
   hs-source-dirs:    src
 
   -- Packages needed in order to build this package.
