@@ -11,6 +11,7 @@ module Debug.TraceUtils(
     traceId
   , traceIdVia
   , traceAround
+  , traceAroundVia
   , tracePutStrLn
   , tracePrint
   , trace
@@ -50,6 +51,11 @@ traceId :: Show a =>
         -> a -> a
 traceId = traceIdVia id
 
+traceAroundVia :: (Show ishow, Show oshow) => (i -> ishow) -> (o -> oshow) -> String -> (i -> o) -> i -> o
+traceAroundVia ishow oshow funcName func =
+  traceIdVia oshow ("output from " ++ funcName) . func .
+  traceIdVia ishow ("input to " ++ funcName)
+
 -- | Convert a pure function to one that also has a side effect of
 -- tracing the value of the input and output values that pass through
 -- the function.
@@ -58,4 +64,4 @@ traceId = traceIdVia id
 --
 -- traceAround \"filterEntries\" filterEntries entries
 traceAround :: (Show i, Show o) => String -> (i -> o) -> i -> o
-traceAround funcName func = traceId ("output from " ++ funcName) . func . traceId ("input to " ++ funcName)
+traceAround = traceAroundVia id id
